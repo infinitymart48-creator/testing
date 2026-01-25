@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>C++ Online Compiler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>C++ Online Compiler (Interactive)</h2>
+
+<textarea id="code">
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x;
+    cout << "Enter number: ";
+    cin >> x;
+    cout << "You entered: " << x << endl;
+}
+</textarea>
+
+<button onclick="run()">Run</button>
+
+<pre id="terminal" contenteditable="true"></pre>
+
+<script src="script.js"></script>
+</body>
+</html>
