@@ -7,7 +7,7 @@ const WebSocket = require("ws");
 const app = express();
 app.use(express.static("public"));
 
-const server = app.listen(3000, () => {
+const server = app.listen(3001, () => {
   console.log("Server running at http://localhost:3000");
 });
 

@@ -19,3 +19,15 @@ textarea {
   white-space: pre-wrap;
   font-family: monospace;
 }
+.cursor {
+  display: inline-block;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hidden {
+  display: none;
+}
