@@ -1,77 +1,111 @@
-const terminal = document.getElementById("terminal");
-const cursor = document.getElementById("cursor");
-const codeEditor = document.getElementById("code");
 const ws = new WebSocket("ws://localhost:3000");
 
-let inputBuffer = "";
+const term = new Terminal({
+  cursorBlink: true,
+  disableStdin: true, // 🔒 LOCK terminal editing
+  convertEol: true,
+  theme: {
+    background: "#000000",
+    foreground: "#00ff00"
+  }
+});
+
+term.open(document.getElementById("terminal"));
+
 let isRunning = false;
-let terminalFocused = false;
 
-// --- Helper to print output BEFORE cursor ---
-function printToTerminal(text) {
-  cursor.remove();
-  terminal.textContent += text;
-  terminal.appendChild(cursor);
-  terminal.scrollTop = terminal.scrollHeight;
-}
-
-// --- WebSocket output ---
+// ---- Output from backend ----
 ws.onmessage = (e) => {
-  printToTerminal(e.data);
+  term.write(e.data);
 };
 
-// --- Run button ---
-function run() {
-  terminal.textContent = "";
-  inputBuffer = "";
-  isRunning = true;
+// ---- Keyboard handling (ONLY place input is handled) ----
+// term.onKey(({ key, domEvent }) => {
+//   if (!isRunning) return;
 
-  ws.send(JSON.stringify({
-    type: "run",
-    code: codeEditor.value
-  }));
+//   domEvent.preventDefault();
 
-  terminal.appendChild(cursor);
-  terminal.focus();
-}
+//   // ✅ ENTER (ONLY when key is '\r')
+//   if (key === "\r") {
+//     term.write("\r\n");
+//     ws.send(JSON.stringify({ type: "input", value: "\n" }));
+//     return;
+//   }
 
-// --- Focus handling ---
-terminal.addEventListener("focus", () => {
-  terminalFocused = true;
-  cursor.classList.remove("hidden");
-});
+//   // ✅ BACKSPACE
+//   if (key === "\x7f") {
+//     term.write("\b \b");
+//     return;
+//   }
 
-terminal.addEventListener("blur", () => {
-  terminalFocused = false;
-  cursor.classList.add("hidden");
-});
+//   // ❌ Ignore escape sequences (arrows, etc.)
+//   if (key.startsWith("\x1b")) {
+//     return;
+//   }
 
-// --- Keyboard input ONLY when terminal focused ---
-document.addEventListener("keydown", (e) => {
-  if (!isRunning || !terminalFocused) return;
+//   // ✅ Printable characters ONLY
+//   if (key.length === 1) {
+//     term.write(key);
+//     ws.send(JSON.stringify({ type: "input", value: key }));
+//   }
+// });
 
-  if (e.key === "Enter") {
-    printToTerminal("\n");
 
+let inputBuffer = "";
+
+term.onKey(({ key, domEvent }) => {
+  if (!isRunning) return;
+
+  domEvent.preventDefault();
+
+  // ENTER → send full line
+  if (key === "\r") {
+    term.write("\r\n");
     ws.send(JSON.stringify({
       type: "input",
       value: inputBuffer + "\n"
     }));
-
     inputBuffer = "";
-    e.preventDefault();
+    return;
   }
-  else if (e.key === "Backspace") {
+
+  // BACKSPACE (robust)
+  if (
+    key === "\x7f" ||
+    key === "\b" ||
+    domEvent.key === "Backspace"
+  ) {
     if (inputBuffer.length > 0) {
       inputBuffer = inputBuffer.slice(0, -1);
-      terminal.textContent = terminal.textContent.slice(0, -1);
-      terminal.appendChild(cursor);
+      term.write("\b \b");
     }
-    e.preventDefault();
+    return;
   }
-  else if (e.key.length === 1) {
-    inputBuffer += e.key;
-    printToTerminal(e.key);
-    e.preventDefault();
-  }
+
+  // Ignore arrows, ctrl, etc.
+  if (key.length !== 1) return;
+
+  // Printable characters
+  inputBuffer += key;
+  term.write(key);
 });
+
+
+
+
+
+
+
+// ---- Run button ----
+function run() {
+  term.reset();
+  isRunning = true;
+
+  ws.send(JSON.stringify({
+    type: "run",
+    code: document.getElementById("code").value
+  }));
+
+  term.focus();
+}
+

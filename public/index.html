@@ -2,31 +2,30 @@
 <html>
 <head>
   <title>C++ Online Compiler</title>
+
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
 </head>
 <body>
 
-<h2>C++ Online Compiler (Interactive)</h2>
+<h2>C++ Online Compiler (xterm)</h2>
 
-<textarea id="code">
+<textarea id="code" >
 #include <iostream>
 using namespace std;
 
 int main() {
     int x;
-    cout << "Enter number: ";
+    cout << "Type a number: ";
     cin >> x;
-    cout << "You entered: " << x << endl;
+    cout << "Your number is: " << x << endl;
 }
 </textarea>
 
 <button onclick="run()">Run</button>
 
-<pre id="terminal" tabindex="0">
-  <span id="cursor" class="cursor hidden">█</span>
-</pre>
-
-
+<div id="terminal"></div>
 
 <script src="script.js"></script>
 </body>
