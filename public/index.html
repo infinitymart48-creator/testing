@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>C++ Online Compiler</title>
-
+  <title>Multi Language Online Compiler</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
   <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
 </head>
 <body>
 
-<h2>C++ Online Compiler (xterm)</h2>
+<h2>Online Compiler</h2>
 
-<textarea id="code" >
+<select id="language">
+  <option value="cpp">C++</option>
+  <option value="c">C</option>
+  <option value="python">Python</option>
+  <option value="java">Java</option>
+</select>
+
+
+<textarea id="code">
 #include <iostream>
 using namespace std;
 
 int main() {
-    int x;
-    cout << "Type a number: ";
-    cin >> x;
-    cout << "Your number is: " << x << endl;
+  int x;
+  cout << "Enter number: ";
+  cin >> x;
+  cout << "You entered: " << x << endl;
 }
 </textarea>
 

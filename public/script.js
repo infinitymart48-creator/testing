@@ -2,7 +2,7 @@ const ws = new WebSocket("ws://localhost:3000");
 
 const term = new Terminal({
   cursorBlink: true,
-  disableStdin: true, // 🔒 LOCK terminal editing
+  disableStdin: true,
   convertEol: true,
   theme: {
     background: "#000000",
@@ -14,42 +14,9 @@ term.open(document.getElementById("terminal"));
 
 let isRunning = false;
 
-// ---- Output from backend ----
 ws.onmessage = (e) => {
   term.write(e.data);
 };
-
-// ---- Keyboard handling (ONLY place input is handled) ----
-// term.onKey(({ key, domEvent }) => {
-//   if (!isRunning) return;
-
-//   domEvent.preventDefault();
-
-//   // ✅ ENTER (ONLY when key is '\r')
-//   if (key === "\r") {
-//     term.write("\r\n");
-//     ws.send(JSON.stringify({ type: "input", value: "\n" }));
-//     return;
-//   }
-
-//   // ✅ BACKSPACE
-//   if (key === "\x7f") {
-//     term.write("\b \b");
-//     return;
-//   }
-
-//   // ❌ Ignore escape sequences (arrows, etc.)
-//   if (key.startsWith("\x1b")) {
-//     return;
-//   }
-
-//   // ✅ Printable characters ONLY
-//   if (key.length === 1) {
-//     term.write(key);
-//     ws.send(JSON.stringify({ type: "input", value: key }));
-//   }
-// });
-
 
 let inputBuffer = "";
 
@@ -90,22 +57,15 @@ term.onKey(({ key, domEvent }) => {
   term.write(key);
 });
 
-
-
-
-
-
-
-// ---- Run button ----
 function run() {
   term.reset();
   isRunning = true;
 
   ws.send(JSON.stringify({
     type: "run",
+    language: document.getElementById("language").value,
     code: document.getElementById("code").value
   }));
 
   term.focus();
 }
-

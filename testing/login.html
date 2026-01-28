@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Helium AI">
+    <meta name="description"
+        content="CodeArena - Professional coding contest platform with multi-language compiler support">
+    <meta name="keywords" content="coding contest, programming competition, online compiler, code challenges">
+    <title>CodeArena - Competitive Programming Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.0/min/vs/loader.min.js"></script>
+    <!-- <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "ytbZHbPHi3QfsXKjo",
+            });
+        })();
+    </script> -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="nav-brand">
+                <i data-lucide="code-2" class="brand-icon"></i>
+                <span class="brand-text">CodeArena</span>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active" data-page="home">
+                    <i data-lucide="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#about" class="nav-link" data-page="about">
+                    <i data-lucide="info"></i>
+                    <span>About</span>
+                </a>
+                <a href="#contests" class="nav-link" data-page="contests">
+                    <i data-lucide="trophy"></i>
+                    <span>Contests</span>
+                </a>
+                <a href="#create-contest" class="nav-link" data-page="create-contest">
+                    <i data-lucide="plus-circle"></i>
+                    <span>Create Contest</span>
+                </a>
+                <a href="#leaderboard" class="nav-link" data-page="leaderboard">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span>Leaderboard</span>
+                </a>
+                <a href="#rules" class="nav-link" data-page="rules">
+                    <i data-lucide="book-open"></i>
+                    <span>Rules</span>
+                </a>
+
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i data-lucide="moon"></i>
+                    </button>
+                    <button class="btn btn-primary" id="loginBtn">
+                        <i data-lucide="log-in"></i>
+                        <span>Login</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main id="mainContent">
+         <section id="login" class="page active">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" data-tab="login">Login</button>
+                        <button class="auth-tab" data-tab="signup">Sign Up</button>
+                    </div>
+
+                    <div class="auth-content">
+                        <!-- Login Form -->
+                        <form id="loginForm" class="auth-form active">
+                            <h2>Welcome Back!</h2>
+                            <p>Login to continue your coding journey</p>
+
+                            <div class="form-group">
+                                <label for="loginEmail">
+                                    <i data-lucide="mail"></i>
+                                    Email Address
+                                </label>
+                                <input type="email" id="loginEmail" required placeholder="your@email.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="loginPassword">
+                                    <i data-lucide="lock"></i>
+                                    Password
+                                </label>
+                                <input type="password" id="loginPassword" required placeholder="Enter your password">
+                            </div>
+
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="rememberMe">
+                                    <span>Remember me</span>
+                                </label>
+                                <a href="#" class="link">Forgot password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i data-lucide="log-in"></i>
+                                <span>Login</span>
+                            </button>
+
+                            <div class="auth-divider">
+                                <span>or continue with</span>
+                            </div>
+
+                            <div class="social-login">
+                                <button type="button" class="btn btn-social">
+                                    <i data-lucide="github"></i>
+                                    <span>GitHub</span>
+                                </button>
+                                <button type="button" class="btn btn-social">
+                                    <i data-lucide="chrome"></i>
+                                    <span>Google</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Signup Form -->
+                        <form id="signupForm" class="auth-form">
+                            <h2>Create Account</h2>
+                            <p>Join the CodeArena community today</p>
+
+                            <div class="form-group">
+                                <label for="signupName">
+                                    <i data-lucide="user"></i>
+                                    Full Name
+                                </label>
+                                <input type="text" id="signupName" required placeholder="John Doe">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupEmail">
+                                    <i data-lucide="mail"></i>
+                                    Email Address
+                                </label>
+                                <input type="email" id="signupEmail" required placeholder="your@email.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupPassword">
+                                    <i data-lucide="lock"></i>
+                                    Password
+                                </label>
+                                <input type="password" id="signupPassword" required
+                                    placeholder="Create a strong password">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupConfirmPassword">
+                                    <i data-lucide="lock"></i>
+                                    Confirm Password
+                                </label>
+                                <input type="password" id="signupConfirmPassword" required
+                                    placeholder="Confirm your password">
+                            </div>
+
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="agreeTerms" required>
+                                    <span>I agree to the <a href="#" class="link">Terms & Conditions</a></span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i data-lucide="user-plus"></i>
+                                <span>Create Account</span>
+                            </button>
+
+                            <div class="auth-divider">
+                                <span>or sign up with</span>
+                            </div>
+
+                            <div class="social-login">
+                                <button type="button" class="btn btn-social">
+                                    <i data-lucide="github"></i>
+                                    <span>GitHub</span>
+                                </button>
+                                <button type="button" class="btn btn-social">
+                                    <i data-lucide="chrome"></i>
+                                    <span>Google</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+     <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i data-lucide="code-2"></i>
+                        <span>CodeArena</span>
+                    </div>
+                    <p>Empowering developers through competitive programming</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+                        <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                        <a href="#" aria-label="Discord"><i data-lucide="message-circle"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#contests">Contests</a></li>
+                        <li><a href="#leaderboard">Leaderboard</a></li>
+                        <li><a href="#create-contest">Create Contest</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#rules">Rules</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CodeArena. Created by Nagendra Singh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>

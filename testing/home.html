@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Helium AI">
+    <meta name="description"
+        content="CodeArena - Professional coding contest platform with multi-language compiler support">
+    <meta name="keywords" content="coding contest, programming competition, online compiler, code challenges">
+    <title>CodeArena - Competitive Programming Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.0/min/vs/loader.min.js"></script>
+    <!-- <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "ytbZHbPHi3QfsXKjo",
+            });
+        })();
+    </script> -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="nav-brand">
+                <i data-lucide="code-2" class="brand-icon"></i>
+                <span class="brand-text">CodeArena</span>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active" data-page="home">
+                    <i data-lucide="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#about" class="nav-link" data-page="about">
+                    <i data-lucide="info"></i>
+                    <span>About</span>
+                </a>
+                <a href="#contests" class="nav-link" data-page="contests">
+                    <i data-lucide="trophy"></i>
+                    <span>Contests</span>
+                </a>
+                <a href="#create-contest" class="nav-link" data-page="create-contest">
+                    <i data-lucide="plus-circle"></i>
+                    <span>Create Contest</span>
+                </a>
+                <a href="#leaderboard" class="nav-link" data-page="leaderboard">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span>Leaderboard</span>
+                </a>
+                <a href="#rules" class="nav-link" data-page="rules">
+                    <i data-lucide="book-open"></i>
+                    <span>Rules</span>
+                </a>
+
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i data-lucide="moon"></i>
+                    </button>
+                    <button class="btn btn-primary" id="loginBtn">
+                        <a href="#login"> 
+                             <i data-lucide="log-in" style="color: white;"></i>
+                        <span style="color: white;">Login</span>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1 class="hero-title">
+                                <span class="gradient-text">Compete. Code. Conquer.</span>
+                            </h1>
+                            <p class="hero-subtitle">
+                                Join thousands of developers in competitive programming challenges.
+                                Test your skills, climb the leaderboard, and become a coding champion.
+                            </p>
+                            <div class="hero-actions">
+                                <button class="btn btn-primary btn-lg" data-navigate="contests">
+                                    <i data-lucide="trophy"></i>
+                                    <span>Browse Contests</span>
+                                </button>
+                                <button class="btn btn-secondary btn-lg" data-navigate="create-contest">
+                                    <i data-lucide="plus-circle"></i>
+                                    <span>Create Contest</span>
+                                </button>
+                            </div>
+                            <div class="hero-stats">
+                                <div class="stat-item">
+                                    <i data-lucide="users"></i>
+                                    <div>
+                                        <div class="stat-value">50K+</div>
+                                        <div class="stat-label">Active Users</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <i data-lucide="code"></i>
+                                    <div>
+                                        <div class="stat-value">1M+</div>
+                                        <div class="stat-label">Submissions</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <i data-lucide="trophy"></i>
+                                    <div>
+                                        <div class="stat-value">500+</div>
+                                        <div class="stat-label">Contests</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-visual">
+                            <div class="code-window">
+                                <div class="code-window-header">
+                                    <div class="window-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                    <div class="window-title">solution.cpp</div>
+                                </div>
+                                <div class="code-window-content">
+                                    <pre><code><span class="code-keyword">#include</span> <span class="code-string">&lt;iostream&gt;</span>
+<span class="code-keyword">using namespace</span> std;
+
+<span class="code-keyword">int</span> <span class="code-function">main</span>() {
+    <span class="code-keyword">int</span> n;
+    cin >> n;
+    
+    <span class="code-comment">// Your solution here</span>
+    <span class="code-keyword">for</span>(<span class="code-keyword">int</span> i = <span class="code-number">0</span>; i < n; i++) {
+        cout << <span class="code-string">"Hello CodeArena!"</span> << endl;
+    }
+    
+    <span class="code-keyword">return</span> <span class="code-number">0</span>;
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Why Choose CodeArena?</h2>
+                        <p>Everything you need for competitive programming in one platform</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i data-lucide="code-2"></i>
+                            </div>
+                            <h3>Multi-Language Support</h3>
+                            <p>Write code in Python, C++, Java, JavaScript, and more. Our compiler supports 10+
+                                programming languages.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i data-lucide="zap"></i>
+                            </div>
+                            <h3>Real-Time Execution</h3>
+                            <p>Instant code compilation and execution with detailed feedback on test cases and
+                                performance metrics.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i data-lucide="trophy"></i>
+                            </div>
+                            <h3>Competitive Contests</h3>
+                            <p>Participate in daily, weekly, and monthly contests. Compete with developers worldwide.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i data-lucide="bar-chart-3"></i>
+                            </div>
+                            <h3>Live Leaderboards</h3>
+                            <p>Track your progress and see how you rank against other participants in real-time.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i data-lucide="users"></i>
+                            </div>
+                            <h3>Community Driven</h3>
+                            <p>Create your own contests, share problems, and engage with a vibrant coding community.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i data-lucide="award"></i>
+                            </div>
+                            <h3>Skill Recognition</h3>
+                            <p>Earn badges, certificates, and recognition for your achievements and problem-solving
+                                skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Contests Section -->
+            <div class="upcoming-contests-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Upcoming Contests</h2>
+                        <p>Don't miss these exciting coding challenges</p>
+                    </div>
+                    <div class="contests-grid" id="upcomingContests">
+                        <!-- Contests will be loaded dynamically -->
+                    </div>
+                    <div class="section-footer">
+                        <button class="btn btn-secondary" data-navigate="contests">
+                            <span>View All Contests</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <div class="container">
+                    <div class="contact-wrapper">
+                        <!-- Left Column - Contact Info -->
+                        <div class="contact-info-side">
+                            <div class="contact-header">
+                                <span class="contact-label">Get in Touch</span>
+                                <h2 class="contact-title">Let's Work Together</h2>
+                                <p class="contact-description">Have a project in mind? We'd love to hear from you. Send
+                                    us a message and we'll respond as soon as possible.</p>
+                            </div>
+
+                            <div class="contact-details">
+                                <div class="contact-detail-item">
+                                    <div class="detail-icon">
+                                        <i data-lucide="mail"></i>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h4>Email</h4>
+                                        <a href="mailto:infinitymart48@gmail.com">infinitymart48@gmail.com</a>
+                                    </div>
+                                </div>
+
+                                <div class="contact-detail-item">
+                                    <div class="detail-icon">
+                                        <i data-lucide="phone"></i>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h4>Phone</h4>
+                                        <a href="tel:+12345678890">+1 (234) 567-890</a>
+                                    </div>
+                                </div>
+
+                                <div class="contact-detail-item">
+                                    <div class="detail-icon">
+                                        <i data-lucide="map-pin"></i>
+                                    </div>
+                                    <div class="detail-content">
+                                        <h4>Location</h4>
+                                        <p>San Francisco, CA</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="social-icons">
+                                <a href="#" class="social-icon" aria-label="Twitter">
+                                    <i data-lucide="twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon" aria-label="LinkedIn">
+                                    <i data-lucide="linkedin"></i>
+                                </a>
+                                <a href="#" class="social-icon" aria-label="GitHub">
+                                    <i data-lucide="github"></i>
+                                </a>
+                                <a href="#" class="social-icon" aria-label="Globe">
+                                    <i data-lucide="globe"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Right Column - Contact Form -->
+                        <div class="contact-form-side">
+                            <form id="contactForm" class="modern-contact-form">
+                                <div class="form-field">
+                                    <label for="contact-name">Name</label>
+                                    <input type="text" id="contact-name" name="from_name" placeholder="Your name"
+                                        required>
+                                    <span class="error-message">Please enter a valid name</span>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="contact-email">Email</label>
+                                    <input type="email" id="contact-email" name="from_email"
+                                        placeholder="your.email@example.com" required>
+                                    <span class="error-message">Please enter a valid email</span>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="contact-subject">Subject</label>
+                                    <input type="text" id="contact-subject" name="subject"
+                                        placeholder="How can we help?" required>
+                                    <span class="error-message">Please enter a subject</span>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="contact-message">Message</label>
+                                    <textarea id="contact-message" name="message" rows="5"
+                                        placeholder="Tell us more about your project..." required style="resize: none;"></textarea>
+                                    <span class="error-message">Please enter a message</span>
+                                </div>
+
+                                <button type="submit" class="submit-btn" value="submit">
+                                    <span>Send Message</span>
+                                    <i data-lucide="send"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>About CodeArena</h1>
+                    <p>Your gateway to competitive programming excellence</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-section">
+                        <div class="about-icon">
+                            <i data-lucide="target"></i>
+                        </div>
+                        <h2>Our Mission</h2>
+                        <p>CodeArena is dedicated to fostering a global community of passionate programmers. We provide
+                            a platform where developers of all skill levels can challenge themselves, learn from others,
+                            and showcase their coding prowess through competitive programming.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>How It Works</h2>
+                        <div class="steps-grid">
+                            <div class="step-card">
+                                <div class="step-number">1</div>
+                                <h3>Sign Up</h3>
+                                <p>Create your free account and set up your profile in minutes.</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">2</div>
+                                <h3>Choose Contest</h3>
+                                <p>Browse through various contests and select one that matches your skill level.</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">3</div>
+                                <h3>Write Code</h3>
+                                <p>Solve problems using our built-in multi-language compiler and IDE.</p>
+                            </div>
+                            <div class="step-card">
+                                <div class="step-number">4</div>
+                                <h3>Submit & Compete</h3>
+                                <p>Submit your solution and see your ranking on the live leaderboard.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Eligibility</h2>
+                        <div class="eligibility-grid">
+                            <div class="eligibility-card">
+                                <i data-lucide="check-circle"></i>
+                                <h3>Open to All</h3>
+                                <p>Anyone with a passion for coding can participate, regardless of age or location.</p>
+                            </div>
+                            <div class="eligibility-card">
+                                <i data-lucide="check-circle"></i>
+                                <h3>All Skill Levels</h3>
+                                <p>From beginners to experts, we have contests tailored for every proficiency level.</p>
+                            </div>
+                            <div class="eligibility-card">
+                                <i data-lucide="check-circle"></i>
+                                <h3>Fair Play</h3>
+                                <p>We maintain strict anti-plagiarism measures to ensure fair competition.</p>
+                            </div>
+                            <div class="eligibility-card">
+                                <i data-lucide="check-circle"></i>
+                                <h3>Free Access</h3>
+                                <p>All core features are completely free. Premium features available for advanced users.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h2>Supported Languages</h2>
+                        <div class="languages-grid">
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>C++</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>Java</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>C</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>C#</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>Ruby</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>Go</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>Rust</span>
+                            </div>
+                            <div class="language-badge">
+                                <i data-lucide="code"></i>
+                                <span>PHP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contests Page -->
+        <section id="contests" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>All Contests</h1>
+                    <p>Find the perfect challenge for your skill level</p>
+                </div>
+
+                <div class="contests-filters">
+                    <div class="filter-group">
+                        <label>
+                            <i data-lucide="filter"></i>
+                            <span>Status</span>
+                        </label>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="all">All Contests</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="ongoing">Ongoing</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>
+                            <i data-lucide="signal"></i>
+                            <span>Difficulty</span>
+                        </label>
+                        <select id="difficultyFilter" class="filter-select">
+                            <option value="all">All Levels</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>
+                            <i data-lucide="search"></i>
+                            <span>Search</span>
+                        </label>
+                        <input type="text" id="searchInput" class="filter-input" placeholder="Search contests...">
+                    </div>
+                </div>
+
+                <div class="contests-list contests-grid" id="contestsList">
+                    <!-- Contests will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contest Details Page -->
+        <section id="contest-details" class="page">
+            <div class="container">
+                <div class="contest-details-content" id="contestDetailsContent">
+                    <!-- Contest details will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Create Contest Page -->
+        <section id="create-contest" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Create New Contest</h1>
+                    <p>Share your coding challenges with the community</p>
+                </div>
+
+                <div class="create-contest-form">
+                    <form id="createContestForm">
+                        <div class="form-section">
+                            <h3>Basic Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="contestTitle">
+                                        <i data-lucide="type"></i>
+                                        Contest Title
+                                    </label>
+                                    <input type="text" id="contestTitle" required placeholder="Enter contest title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contestDifficulty">
+                                        <i data-lucide="signal"></i>
+                                        Difficulty Level
+                                    </label>
+                                    <select id="contestDifficulty" required>
+                                        <option value="">Select difficulty</option>
+                                        <option value="easy">Easy</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="hard">Hard</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contestDescription">
+                                    <i data-lucide="file-text"></i>
+                                    Description
+                                </label>
+                                <textarea id="contestDescription" rows="4" required
+                                    placeholder="Describe your contest..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Schedule</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="startDate">
+                                        <i data-lucide="calendar"></i>
+                                        Start Date & Time
+                                    </label>
+                                    <input type="datetime-local" id="startDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="endDate">
+                                        <i data-lucide="calendar"></i>
+                                        End Date & Time
+                                    </label>
+                                    <input type="datetime-local" id="endDate" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Problem Statement</h3>
+                            <div class="form-group">
+                                <label for="problemTitle">
+                                    <i data-lucide="code"></i>
+                                    Problem Title
+                                </label>
+                                <input type="text" id="problemTitle" required placeholder="Enter problem title">
+                            </div>
+                            <div class="form-group">
+                                <label for="problemStatement">
+                                    <i data-lucide="file-text"></i>
+                                    Problem Description
+                                </label>
+                                <textarea id="problemStatement" rows="8" required
+                                    placeholder="Describe the problem in detail..."></textarea>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="inputFormat">
+                                        <i data-lucide="arrow-down-circle"></i>
+                                        Input Format
+                                    </label>
+                                    <textarea id="inputFormat" rows="3" required
+                                        placeholder="Describe input format..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="outputFormat">
+                                        <i data-lucide="arrow-up-circle"></i>
+                                        Output Format
+                                    </label>
+                                    <textarea id="outputFormat" rows="3" required
+                                        placeholder="Describe output format..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Test Cases</h3>
+                            <div id="testCasesContainer">
+                                <div class="test-case-item">
+                                    <div class="form-grid">
+                                        <div class="form-group">
+                                            <label>Sample Input</label>
+                                            <textarea class="test-input" rows="3" required
+                                                placeholder="Enter sample input..."></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Expected Output</label>
+                                            <textarea class="test-output" rows="3" required
+                                                placeholder="Enter expected output..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary" id="addTestCase">
+                                <i data-lucide="plus"></i>
+                                <span>Add Test Case</span>
+                            </button>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" data-navigate="contests">
+                                <i data-lucide="x"></i>
+                                <span>Cancel</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i data-lucide="check"></i>
+                                <span>Publish Contest</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Page -->
+        <section id="leaderboard" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Global Leaderboard</h1>
+                    <p>Top performers across all contests</p>
+                </div>
+
+                <div class="leaderboard-filters">
+                    <button class="filter-btn active" data-period="all">All Time</button>
+                    <button class="filter-btn" data-period="month">This Month</button>
+                    <button class="filter-btn" data-period="week">This Week</button>
+                </div>
+
+                <div class="leaderboard-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>User</th>
+                                <th>Score</th>
+                                <th>Contests</th>
+                                <th>Problems Solved</th>
+                                <th>Accuracy</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <!-- Leaderboard data will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rules Page -->
+        <section id="rules" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Contest Rules & Guidelines</h1>
+                    <p>Please read carefully before participating</p>
+                </div>
+
+                <div class="rules-content">
+                    <div class="rule-section">
+                        <div class="rule-icon">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <h2>General Rules</h2>
+                        <ul>
+                            <li>All participants must register with a valid email address</li>
+                            <li>Each participant can submit only one solution per problem</li>
+                            <li>Solutions must be original work - plagiarism will result in disqualification</li>
+                            <li>Participants must not share solutions during active contests</li>
+                            <li>Use of external libraries must be declared and approved</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-section">
+                        <div class="rule-icon">
+                            <i data-lucide="clock"></i>
+                        </div>
+                        <h2>Time & Submission</h2>
+                        <ul>
+                            <li>Contest duration is clearly specified for each competition</li>
+                            <li>Late submissions will not be accepted</li>
+                            <li>Time penalty applies for incorrect submissions</li>
+                            <li>System time is the official reference for all deadlines</li>
+                            <li>Participants can submit multiple times before the deadline</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-section">
+                        <div class="rule-icon">
+                            <i data-lucide="code"></i>
+                        </div>
+                        <h2>Code Requirements</h2>
+                        <ul>
+                            <li>Code must compile and run without errors</li>
+                            <li>Solutions must pass all test cases to receive full points</li>
+                            <li>Time and memory limits must be respected</li>
+                            <li>Code should be well-commented and readable</li>
+                            <li>Standard input/output must be used as specified</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-section">
+                        <div class="rule-icon">
+                            <i data-lucide="trophy"></i>
+                        </div>
+                        <h2>Scoring System</h2>
+                        <ul>
+                            <li>Points are awarded based on problem difficulty and completion time</li>
+                            <li>Partial credit may be given for partially correct solutions</li>
+                            <li>Penalty points are deducted for wrong submissions</li>
+                            <li>Tie-breakers are resolved by submission time</li>
+                            <li>Final rankings are published after contest completion</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-section">
+                        <div class="rule-icon">
+                            <i data-lucide="alert-triangle"></i>
+                        </div>
+                        <h2>Prohibited Actions</h2>
+                        <ul>
+                            <li>Using multiple accounts to participate in the same contest</li>
+                            <li>Attempting to hack or manipulate the judging system</li>
+                            <li>Sharing or discussing solutions during active contests</li>
+                            <li>Using automated tools to generate solutions</li>
+                            <li>Any form of cheating or unfair advantage</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-section">
+                        <div class="rule-icon">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <h2>Code of Conduct</h2>
+                        <ul>
+                            <li>Treat all participants with respect and courtesy</li>
+                            <li>Report any suspicious activity to moderators</li>
+                            <li>Provide constructive feedback in discussions</li>
+                            <li>Help maintain a positive learning environment</li>
+                            <li>Follow community guidelines at all times</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login/Signup Page -->
+        <section id="login" class="page">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" data-tab="login">Login</button>
+                        <button class="auth-tab" data-tab="signup">Sign Up</button>
+                    </div>
+
+                    <div class="auth-content">
+                        <!-- Login Form -->
+                        <form id="loginForm" class="auth-form active">
+                            <h2>Welcome Back!</h2>
+                            <p>Login to continue your coding journey</p>
+
+                            <div class="form-group">
+                                <label for="loginEmail">
+                                    <i data-lucide="mail"></i>
+                                    Email Address
+                                </label>
+                                <input type="email" id="loginEmail" required placeholder="your@email.com" name="email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="loginPassword">
+                                    <i data-lucide="lock"></i>
+                                    Password
+                                </label>
+                                <input type="password" id="loginPassword" required placeholder="Enter your password" name="password">
+                            </div>
+
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="rememberMe">
+                                    <span>Remember me</span>
+                                </label>
+                                <a href="#" class="link">Forgot password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i data-lucide="log-in"></i>
+                                <span>Login</span>
+                            </button>
+
+                            <div class="auth-divider">
+                                <span>or continue with</span>
+                            </div>
+
+                            <div class="social-login">
+                                <button type="button" class="btn btn-social">
+                                    <i data-lucide="github"></i>
+                                    <span>GitHub</span>
+                                </button>
+                                <button type="button" class="btn btn-social">
+                                    <i data-lucide="chrome"></i>
+                                    <span>Google</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Signup Form -->
+                        <form id="signupForm" class="auth-form">
+                            <h2>Create Account</h2>
+                            <p>Join the CodeArena community today</p>
+
+                            <div class="form-group">
+                                <label for="signupName">
+                                    <i data-lucide="user"></i>
+                                    Full Name
+                                </label>
+                                <input type="text" id="signupName" required placeholder="John Doe" name="user_name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupEmail">
+                                    <i data-lucide="mail"></i>
+                                    Email Address
+                                </label>
+                                <input type="email" id="signupEmail" required placeholder="your@email.com" name="user_email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupPassword">
+                                    <i data-lucide="lock"></i>
+                                    Password
+                                </label>
+                                <input type="password" id="signupPassword" required
+                                    placeholder="Create a strong password" name="user_password">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupConfirmPassword">
+                                    <i data-lucide="lock"></i>
+                                    Confirm Password
+                                </label>
+                                <input type="password" id="signupConfirmPassword" required
+                                    placeholder="Confirm your password" name="user_confirmpassword">
+                            </div>
+
+                            <div class="form-options">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="agreeTerms" required>
+                                    <span>I agree to the <a href="#" class="link">Terms & Conditions</a></span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i data-lucide="user-plus"></i>
+                                <span>Create Account</span>
+                            </button>
+
+                            <div class="auth-divider">
+                                <span>or sign up with</span>
+                            </div>
+
+                            <div class="social-login">
+                                <button type="button" class="btn btn-social">
+                                    <i data-lucide="github"></i>
+                                    <span>GitHub</span>
+                                </button>
+                                <button type="button" class="btn btn-social">
+                                    <i data-lucide="chrome"></i>
+                                    <span>Google</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Contest Rounds Modal -->
+    <div id="contestRoundsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Contest Rounds</h2>
+                <button class="modal-close" onclick="closeContestRoundsModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="rounds-grid">
+                    <div class="round-card" onclick="openRoundPassword(1)">
+                        <div class="round-icon">
+                            <i data-lucide="circle-1"></i>
+                        </div>
+                        <h3>Round 1</h3>
+                        <p>Beginner Level Problems</p>
+                        <div class="round-meta">
+                            <span class="round-difficulty easy">Easy</span>
+                            <span class="round-status">
+                                <i data-lucide="lock"></i>
+                                <span>Locked</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="round-card" onclick="openRoundPassword(2)">
+                        <div class="round-icon">
+                            <i data-lucide="circle-2"></i>
+                        </div>
+                        <h3>Round 2</h3>
+                        <p>Intermediate Challenges</p>
+                        <div class="round-meta">
+                            <span class="round-difficulty medium">Medium</span>
+                            <span class="round-status">
+                                <i data-lucide="lock"></i>
+                                <span>Locked</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="round-card" onclick="openRoundPassword(3)">
+                        <div class="round-icon">
+                            <i data-lucide="circle-3"></i>
+                        </div>
+                        <h3>Round 3</h3>
+                        <p>Advanced Problems</p>
+                        <div class="round-meta">
+                            <span class="round-difficulty hard">Hard</span>
+                            <span class="round-status">
+                                <i data-lucide="lock"></i>
+                                <span>Locked</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2>Enter Password</h2>
+                <button class="modal-close" onclick="closePasswordModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="password-instruction">This round is password protected. Enter the password to continue.</p>
+                <form id="passwordForm" onsubmit="verifyPassword(event)">
+                    <div class="form-group">
+                        <label for="roundPassword">Password</label>
+                        <div class="input-with-icon">
+                            <i data-lucide="lock" style="display: inline-block;position:absolute;top:9; left: 12;"></i>
+                            <input type="password" id="roundPassword" class="form-input" placeholder="Enter password"
+                                required>
+                        </div>
+                        <div id="passwordError" class="error-message" style="display: none;">
+                            Incorrect password. Please try again.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i data-lucide="unlock"></i>
+                        <span>Unlock Round</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i data-lucide="code-2"></i>
+                        <span>CodeArena</span>
+                    </div>
+                    <p>Empowering developers through competitive programming</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+                        <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                        <a href="#" aria-label="Discord"><i data-lucide="message-circle"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#contests">Contests</a></li>
+                        <li><a href="#leaderboard">Leaderboard</a></li>
+                        <li><a href="#create-contest">Create Contest</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#rules">Rules</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CodeArena. Created by Nagendra Singh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

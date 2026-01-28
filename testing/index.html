@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Helium AI">
+    <meta name="description" content="CodeArena - Coding Challenge Round">
+    <title>CodeArena - Coding Challenge</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
+<script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
+
+</head>
+
+<body>
+    <!-- Navigation (Same as main site) -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="nav-brand" onclick="window.location.href='index.html'">
+                <i data-lucide="code-2" class="brand-icon"></i>
+                <span class="brand-text">CodeArena</span>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <div class="nav-menu" id="navMenu">
+                <a href="/home#home" class="nav-link">
+                    <i data-lucide="home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="home#about" class="nav-link">
+                    <i data-lucide="info"></i>
+                    <span>About</span>
+                </a>
+                <a href="home#contests" class="nav-link">
+                    <i data-lucide="trophy"></i>
+                    <span>Contests</span>
+                </a>
+                <a href="home#create-contest" class="nav-link">
+                    <i data-lucide="plus-circle"></i>
+                    <span>Create Contest</span>
+                </a>
+                <a href="home#leaderboard" class="nav-link">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span>Leaderboard</span>
+                </a>
+                <a href="home#rules" class="nav-link">
+                    <i data-lucide="book-open"></i>
+                    <span>Rules</span>
+                </a>
+
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i data-lucide="moon"></i>
+                    </button>
+                    <button class="btn btn-primary" id="loginBtn">
+                        <i data-lucide="log-in"></i>
+                        <span>Login</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding-top: 100px; min-height: 100vh;">
+        <div class="container">
+            <!-- Round Header -->
+            <div class="round-header">
+                <button class="btn btn-secondary" onclick="window.location.href='home#contests'">
+                    <i data-lucide="arrow-left"></i>
+                    <span>Back to Contests</span>
+                </button>
+                <div class="round-info">
+                    <h1 id="roundTitle">Round 1 - Coding Challenge</h1>
+                    <div class="round-meta-info">
+                        <span class="meta-badge">
+                            <i data-lucide="clock"></i>
+                            <span id="timeRemaining">1:00:00</span>
+                        </span>
+                        <span class="meta-badge">
+                            <i data-lucide="code"></i>
+                            <span id="selectedLanguage">Not Selected</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Language Selection Section -->
+            <div id="languageSelectionSection" class="language-selection-section">
+                <div class="selection-card">
+                    <div class="selection-header">
+                        <i data-lucide="code-2"></i>
+                        <h2>Select Your Programming Language</h2>
+                        <p>Choose the language you want to use for this coding challenge</p>
+                    </div>
+
+                    <div class="languages-grid">
+                        <div class="language-option" onclick="selectLanguage('python')">
+                            <div class="language-icon">🐍</div>
+                            <h3>Python</h3>
+                            <p>Python 3.11</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('javascript')">
+                            <div class="language-icon">📜</div>
+                            <h3>JavaScript</h3>
+                            <p>Node.js 20.x</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('java')">
+                            <div class="language-icon">☕</div>
+                            <h3>Java</h3>
+                            <p>Java 17</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('cpp')">
+                            <div class="language-icon">⚡</div>
+                            <h3>C++</h3>
+                            <p>C++17</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('c')">
+                            <div class="language-icon">🔧</div>
+                            <h3>C</h3>
+                            <p>C11</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('csharp')">
+                            <div class="language-icon">🎯</div>
+                            <h3>C#</h3>
+                            <p>.NET 8.0</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('ruby')">
+                            <div class="language-icon">💎</div>
+                            <h3>Ruby</h3>
+                            <p>Ruby 3.2</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('go')">
+                            <div class="language-icon">🔵</div>
+                            <h3>Go</h3>
+                            <p>Go 1.21</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('rust')">
+                            <div class="language-icon">🦀</div>
+                            <h3>Rust</h3>
+                            <p>Rust 1.75</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('php')">
+                            <div class="language-icon">🐘</div>
+                            <h3>PHP</h3>
+                            <p>PHP 8.3</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('swift')">
+                            <div class="language-icon">🦅</div>
+                            <h3>Swift</h3>
+                            <p>Swift 5.9</p>
+                        </div>
+                        <div class="language-option" onclick="selectLanguage('kotlin')">
+                            <div class="language-icon">🎨</div>
+                            <h3>Kotlin</h3>
+                            <p>Kotlin 1.9</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coding Challenge Section (Hidden initially) -->
+            <div id="codingChallengeSection" class="coding-challenge-section" style="display: none;">
+                <div class="challenge-layout">
+                    <!-- Problem Statement -->
+                    <div class="problem-panel">
+                        <div class="panel-header">
+                            <h2>Problem Statement</h2>
+                            <button class="btn btn-secondary btn-sm" onclick="changeLanguage()">
+                                <i data-lucide="refresh-cw"></i>
+                                <span>Change Language</span>
+                            </button>
+                        </div>
+                        <div class="problem-content" id="problemContent">
+                            <!-- Problem will be loaded here based on language -->
+                        </div>
+                    </div>
+
+                    <!-- Code Editor -->
+                    <div class="editor-panel">
+                        <div class="panel-header">
+                            <h3>Code Editor</h3>
+                            <div class="editor-actions">
+                                <button class="btn btn-secondary btn-sm" onclick="resetCode()">
+                                    <i data-lucide="rotate-ccw"></i>
+                                    <span>Reset</span>
+                                </button>
+                                <button class="btn btn-secondary btn-sm" onclick="clearOutput()">
+                                    <i data-lucide="trash-2"></i>
+                                    <span>Clear Output</span>
+                                </button>
+                                <button class="btn btn-secondary btn-sm" id="runBtn" onclick="runCode()">
+                                    <i data-lucide="play"></i>
+                                    <span>Run</span>
+                                </button>
+                                <button class="btn btn-primary btn-sm" onclick="submitSolution()">
+                                    <i data-lucide="send"></i>
+                                    <span>Submit</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="editor-body">
+                            <div id="monacoEditorContainer" style="height: 600px; width: 100%;"></div>
+                            <!--<textarea id="codeEditor" class="code-editor" spellcheck="false"></textarea>-->
+                        
+                        <!-- <div class="output-panel" id="outputPanel" style="display:none;">
+                            <div class="output-header">
+                                <h4>Output</h4>
+                                <button class="btn-icon" onclick="clearOutput()">
+                                    <i data-lucide="x"></i>
+                                </button>
+                            </div>
+                            <pre id="codeOutput" class="code-output"></pre>
+                        </div> -->
+                            <div class="terminal-section">
+                                <div class="terminal-header">
+                                    <h4><i data-lucide="terminal"></i> Terminal Output</h4>
+                                    <div class="terminal-actions">
+                                        <button class="btn-icon" onclick="clearTerminal()" title="Clear Terminal">
+                                            <i data-lucide="trash-2"></i>
+                                        </button>
+                                        <button class="btn-icon" id="fullscreenTerminal"
+                                            onclick="toggleTerminalFullscreen()" title="Toggle Fullscreen">
+                                            <i data-lucide="maximize-2"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="terminal"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <script src="code.js" defer></script>
+</body>
+
+</html>
