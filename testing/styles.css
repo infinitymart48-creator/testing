@@ -3169,7 +3169,7 @@ a:hover {
     }
 }
 /* Language badges */
-.language-badge {
+/* .language-badge {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -3177,7 +3177,7 @@ a:hover {
     border-radius: 12px;
     font-size: 0.7rem;
     font-weight: 600;
-}
+} */
 
 .language-badge.coming-soon {
     background: var(--bg-tertiary);
