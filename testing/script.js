@@ -79,31 +79,21 @@ const AppState = {
 
     updateThemeIcon() {
         const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            const icon = themeToggle.querySelector('i');
-            icon.setAttribute('data-lucide', this.theme === 'dark' ? 'sun' : 'moon');
-            lucide.createIcons();
-        }
+        if (!themeToggle) return;
+
+        const icon = themeToggle.querySelector('i');
+        if (!icon) return; // ✅ prevents crash
+
+        icon.setAttribute(
+            'data-lucide',
+            this.theme === 'dark' ? 'sun' : 'moon'
+        );
+
+        lucide.createIcons();
     },
 
-    // updateUI() {
-    //     const loginBtn = document.getElementById('loginBtn');
-    //     if (loginBtn) {
-    //         if (this.currentUser) {
-    //             loginBtn.innerHTML = `
-    //                 <i data-lucide="user"></i>
-    //                 <span>${this.currentUser.name}</span>
-    //             `;
-    //         } else {
-    //             loginBtn.innerHTML = `
-    //                 <i data-lucide="log-in"></i>
-    //                 <span>Login</span>
-    //             `;
-    //         }
-    //         lucide.createIcons();
-    //     }
-    // }
-     updateUI() {
+   
+    updateUI() {
         const loginBtn = document.getElementById('loginBtn');
         if (loginBtn) {
             if (this.currentUser) {
@@ -141,17 +131,18 @@ const AppState = {
                     </div>
                 `;
                 lucide.createIcons();
-                
+                this.updateThemeIcon();
+
                 // Add dropdown toggle functionality
                 const userDropdown = document.getElementById('userDropdown');
                 const userDropdownBtn = document.getElementById('userDropdownBtn');
-                
+
                 if (userDropdownBtn && userDropdown) {
                     userDropdownBtn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         userDropdown.classList.toggle('active');
                     });
-                    
+
                     // Close dropdown when clicking outside
                     document.addEventListener('click', (e) => {
                         if (!userDropdown.contains(e.target)) {
@@ -170,7 +161,7 @@ const AppState = {
                         </button>
                     `;
                     lucide.createIcons();
-                    
+                    this.updateThemeIcon();
                     // Re-attach login event listener
                     const newLoginBtn = document.getElementById('loginBtn');
                     if (newLoginBtn) {
@@ -191,18 +182,18 @@ const AppState = {
         // Clear user data
         this.currentUser = null;
         localStorage.removeItem('user');
-        
+
         // Update UI
         this.updateUI();
-        
+
         // Show notification
         showNotification('Logged out successfully!', 'success');
-        
+
         // Navigate to home page
         window.location.reload();
         navigateTo('home');
     },
-    
+
     viewProfile() {
         showNotification('Profile page coming soon!', 'info');
         // In the future, navigate to profile page
@@ -1386,123 +1377,125 @@ function showNotification(message, type = 'info') {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize EmailJS with public key
     // emailjs.init('ytbZHbPHi3QfsXKjo'); // User needs to replace this with their EmailJS public key
-     const savedUser = localStorage.getItem('user');
+    const savedUser = localStorage.getItem('user');
     if (savedUser) {
         AppState.currentUser = JSON.parse(savedUser);
         AppState.updateUI();
     }
-   function formdata(){
-    const form = document.getElementById("contactForm");
+    function formdata() {
+        const form = document.getElementById("contactForm");
 
-    if (!form) return;
+        if (!form) return;
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-        const formData = new FormData(form);
+            const formData = new FormData(form);
 
-        const response = await fetch("/contact", {
-            method: "POST",
-            body: new URLSearchParams(formData)
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            alert("Message sent successfully!");
-            form.reset();
-        } else {
-            alert(" Something went wrong!");
-        }
-    });}
-    formdata();
-  // Login page logic
-  function loggingdata(){
-    const logininfo = document.getElementById("loginForm");
-
-    if (!logininfo) return;
-    
-
-    logininfo.addEventListener("submit", async (e) => {
-        e.preventDefault();
-          const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-         const user = {
-                name: email.split('@')[0],
-                email: email
-            };
-            
-
-        const loginData = new FormData(logininfo);
-
-        const response = await fetch("/loginsuck", {
-            method: "POST",
-            body: new URLSearchParams(loginData)
-        });
-
-        const result = await response.json();
-
-        
-        if (result.success) {
-            alert("Message sent successfully!");
-        
-            AppState.setUser(user);
-            showNotification('Login successful!', 'success');
-
-            setTimeout(() => {
-                navigateTo('home');
-            }, 1000);
-                form.reset();
-        } else {
-            alert(" Something went wrong!");
-            showNotification('Singup Required!', 'Failed');
-
-            setTimeout(() => {
-                navigateTo('login');
-            }, 1000);
-
-        }
-    });}
-    loggingdata()
-
-
-   function signupdata(){
-     const signupinfo = document.getElementById("signupForm");
-
-
-
-    if (!signupinfo) return;
-
-    signupinfo.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const name = document.getElementById('signupName').value;
-        const email = document.getElementById('signupEmail').value;
-        const password = document.getElementById('signupPassword').value;
-        const confirmPassword = document.getElementById('signupConfirmPassword').value;
-
-        if (password !== confirmPassword) {
-            showNotification('Passwords do not match!', 'error');
-            return;
-        } else {
-            const signupData = new FormData(signupinfo);
-
-            const response = await fetch("/signup", {
+            const response = await fetch("/contact", {
                 method: "POST",
-                body: new URLSearchParams(signupData)
+                body: new URLSearchParams(formData)
             });
 
             const result = await response.json();
 
             if (result.success) {
-
+                alert("Message sent successfully!");
                 form.reset();
             } else {
                 alert(" Something went wrong!");
             }
-        }
-    });
-   }
-   signupdata();
+        });
+    }
+    formdata();
+    // Login page logic
+    function loggingdata() {
+        const logininfo = document.getElementById("loginForm");
+
+        if (!logininfo) return;
+
+
+        logininfo.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const user = {
+                name: email.split('@')[0],
+                email: email
+            };
+
+
+            const loginData = new FormData(logininfo);
+
+            const response = await fetch("/loginsuck", {
+                method: "POST",
+                body: new URLSearchParams(loginData)
+            });
+
+            const result = await response.json();
+
+
+            if (result.success) {
+                alert("Message sent successfully!");
+
+                AppState.setUser(user);
+                showNotification('Login successful!', 'success');
+
+                setTimeout(() => {
+                    navigateTo('home');
+                }, 1000);
+                logininfo.reset();
+            } else {
+                alert(" Something went wrong!");
+                showNotification('Singup Required!', 'Failed');
+
+                setTimeout(() => {
+                    navigateTo('login');
+                }, 1000);
+
+            }
+        });
+    }
+    loggingdata()
+
+
+    function signupdata() {
+        const signupinfo = document.getElementById("signupForm");
+
+
+
+        if (!signupinfo) return;
+
+        signupinfo.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match!', 'error');
+                return;
+            } else {
+                const signupData = new FormData(signupinfo);
+
+                const response = await fetch("/signup", {
+                    method: "POST",
+                    body: new URLSearchParams(signupData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+
+                    form.reset();
+                } else {
+                    alert(" Something went wrong!");
+                }
+            }
+        });
+    }
+    signupdata();
 
 
 

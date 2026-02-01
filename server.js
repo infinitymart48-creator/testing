@@ -8,9 +8,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("testing"));
+app.use(express.static("testing",{
+  index: "home.html"
+}));
 
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
     const homepage = path.join(__dirname, "testing", "home.html");
     res.sendFile(homepage)
 })

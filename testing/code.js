@@ -94,7 +94,8 @@ function initTerminal() {
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Lucide icons
     lucide.createIcons();
-    
+   // restoreLoginState();
+     updateUI();
     // Get round number from URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     currentRound = urlParams.get('round') || localStorage.getItem('currentRound') || '1';
@@ -206,24 +207,68 @@ function updateMonacoTheme() {
 function initTheme() {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    
+
     const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        const icon = themeToggle.querySelector('i');
-        icon.setAttribute('data-lucide', savedTheme === 'dark' ? 'sun' : 'moon');
-        lucide.createIcons();
-        
-        themeToggle.addEventListener('click', function() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            icon.setAttribute('data-lucide', newTheme === 'dark' ? 'sun' : 'moon');
-            lucide.createIcons();
-            updateMonacoTheme();
-        });
+    if (!themeToggle) return;
+
+    let icon = themeToggle.querySelector('i');
+
+    // 🔐 If icon is not ready yet, retry once
+    if (!icon) {
+        setTimeout(initTheme, 50);
+        return;
     }
+
+    icon.setAttribute(
+        'data-lucide',
+        savedTheme === 'dark' ? 'sun' : 'moon'
+    );
+    lucide.createIcons();
+
+    themeToggle.onclick = () => {
+        const currentTheme =
+            document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+
+        icon.setAttribute(
+            'data-lucide',
+            newTheme === 'dark' ? 'sun' : 'moon'
+        );
+        lucide.createIcons();
+        updateMonacoTheme();
+    };
 }
+function restoreLoginState() {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!user) return;
+
+    const loginBtn = document.getElementById('loginBtn');
+    if (!loginBtn) return;
+
+    loginBtn.outerHTML = `
+        <div class="user-dropdown" id="userDropdown">
+            <button class="user-dropdown-btn" id="userDropdownBtn">
+                <i data-lucide="user"></i>
+                <span>${user.name}</span>
+                <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="user-dropdown-menu">
+                <button class="dropdown-menu-item logout" onclick="logoutUser()">
+                    <i data-lucide="log-out"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+    `;
+
+    lucide.createIcons();
+}
+
+
 
 // ===================================
 // MOBILE MENU
@@ -2249,5 +2294,69 @@ function toggleTerminalFullscreen() {
     
     if (term) {
         term.resize(term.cols, term.rows);
+    }
+}
+function updateUI() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const loginBtn = document.getElementById('loginBtn');
+
+    if (!loginBtn && !document.getElementById('userDropdown')) return;
+
+    if (user) {
+        if (document.getElementById('userDropdown')) return;
+
+        loginBtn.outerHTML = `
+            <div class="user-dropdown" id="userDropdown">
+                <button class="user-dropdown-btn" id="userDropdownBtn">
+                    <i data-lucide="user"></i>
+                    <span>${user.name}</span>
+                    <i data-lucide="chevron-down"></i>
+                </button>
+                <div class="user-dropdown-menu">
+                    <button class="dropdown-menu-item" onclick="AppState.viewProfile()">
+                                    <i data-lucide="user"></i>
+                                    <span>Profile</span>
+                                </button>
+                    <button class="dropdown-menu-item logout" id="logoutBtn">
+                        <i data-lucide="log-out"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        lucide.createIcons();
+
+        const userDropdown = document.getElementById('userDropdown');
+        const userDropdownBtn = document.getElementById('userDropdownBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        userDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!userDropdown.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('user');
+            window.location.href = '/#home';
+        });
+
+    } else {
+        const dropdown = document.getElementById('userDropdown');
+        if (dropdown) {
+            dropdown.outerHTML = `
+                <button class="btn btn-primary" id="loginBtn">
+                    <i data-lucide="log-in"></i>
+                    <span>Login</span>
+                </button>
+            `;
+            lucide.createIcons();
+        }
     }
 }
