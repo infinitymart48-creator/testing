@@ -46,6 +46,7 @@ function initTerminal() {
         cursorBlink: true,
         disableStdin: true,
         convertEol: true,
+        scrollback: 10000,
         theme: {
             background: "#000000",
             foreground: "#00ff00"
