@@ -4,6 +4,9 @@ const path = require("path");
 const { spawn } = require("child_process");
 const WebSocket = require("ws");
 const app = express();
+const pLimit = require("p-limit");
+//const limit = pLimit(5); // only 5 containers at once
+
 
 
 app.use(express.json());
@@ -25,8 +28,8 @@ app.get("/login", (req, res) => {
   res.sendFile(loginpage)
 })
 
-const server = app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+const server = app.listen(4000, () => {
+  console.log("Server running on http://localhost:4000");
 });
 
 const wss = new WebSocket.Server({ server });
@@ -97,7 +100,7 @@ wss.on("connection", (ws) => {
        // OUTPUT LIMIT (still recommended for safety)
       let outputSize = 0;
       let killedForOutput = false;
-      const MAX_OUTPUT = 100000;
+      const MAX_OUTPUT = 50000;
 
       function handleOutput(dataChunk) {
         if (killedForOutput) return;
